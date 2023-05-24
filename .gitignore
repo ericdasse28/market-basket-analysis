@@ -1,0 +1,10 @@
+# Environments
+.env
+.venv
+venv/
+
+# Python
+__pycache__/
+
+# Unit tests
+.pytest_cache/
