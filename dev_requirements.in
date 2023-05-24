@@ -1,3 +1,4 @@
 black
-dvc
+dvc>=2.58.1
 flake8
+dvc-gdrive>=2.19.2
