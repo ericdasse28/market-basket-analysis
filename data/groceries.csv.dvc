@@ -1,5 +1,4 @@
 outs:
-- md5: caf831172c78ca05d0fd45da4b05c36d
-  size: 510697
-  isexec: true
+- md5: 40921a38d0626b35cc4251fb3778dfbf
+  size: 1103280
   path: groceries.csv
