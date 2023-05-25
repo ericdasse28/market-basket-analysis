@@ -36,7 +36,9 @@ def learn_association_rules():
         inspect(association_results),
         columns=["Product1", "Product2", "Support (%)", "Confidence (%)", "lift"],
     )
-    association_df["Rule"] = association_df[["Product1", "Product2"]].apply(lambda row: "->".join(row.values.astype(str)), axis=1)
+    association_df["Rule"] = association_df[["Product1", "Product2"]].apply(
+        lambda row: "->".join(row.values.astype(str)), axis=1
+    )
 
     return association_df
 
@@ -49,8 +51,8 @@ def train(serialize=True):
 
     if serialize:
         logger.info("Sérialisation du modèle...")
-        
-        with open("association_rules.pkl", "wb") as association_rules_file:
+
+        with open("model/association_rules.pkl", "wb") as association_rules_file:
             pickle.dump(association_rules_df, file=association_rules_file)
 
         logger.info("Modèle sérialisé.")
