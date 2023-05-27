@@ -1,0 +1,16 @@
+stages:
+  process_data: # Process data
+    cmd: python src/process_data.py
+    deps:
+    - data/raw/groceries.csv
+    - src/process_data.py
+    outs:
+    - data/prepared/prepared.csv
+  
+  train: # Train processed data
+    cmd: python src/train.py
+    deps:
+    - data/prepared/prepared.csv
+    - src/train.py
+    outs:
+    - model/association_rules.pkl
