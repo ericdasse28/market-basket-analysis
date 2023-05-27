@@ -1,7 +1,16 @@
+from pathlib import Path
 import pickle
 from loguru import logger
 import pandas as pd
 from apyori import apriori
+
+
+def read_transaction_csv(csv_path):
+    with open(csv_path, "r") as transaction_csv:
+        list_transactions = transaction_csv.readlines()
+        list_transactions = map(lambda row: row.split(","), list_transactions)
+
+        return list_transactions
 
 
 def inspect(results):
@@ -15,15 +24,16 @@ def inspect(results):
 
 
 def learn_association_rules():
-    sales_df = pd.read_csv("data/groceries.csv")
+    repo_path = Path(__file__).parent.parent
+    prepared_data_path = repo_path / "data/prepared/prepared.csv"
+    transactions = read_transaction_csv(prepared_data_path)
 
-    transactions = sales_df.groupby(["Member_number", "Date"])
-    list_transactions = [
-        transaction[1]["itemDescription"].tolist() for transaction in list(transactions)
-    ]
+    # list_transactions = [
+    #     transaction[1]["itemDescription"].tolist() for transaction in list(transactions)
+    # ]
 
     association_rules = apriori(
-        list_transactions,
+        transactions,
         min_support=0.001,
         min_confidence=0.05,
         min_lift=1.2,
@@ -46,18 +56,19 @@ def learn_association_rules():
 def train(serialize=True):
     logger.info("Début de l'entraînement...")
     association_rules_df = learn_association_rules()
+    logger.info("Entraînement terminé.")
 
     logger.info(f"Aperçu des règles d'association\n{association_rules_df.head()}")
 
     if serialize:
         logger.info("Sérialisation du modèle...")
+        repo_path = Path(__file__).parent.parent
+        model_save_path = repo_path / "model/association_rules.pkl"
 
-        with open("model/association_rules.pkl", "wb") as association_rules_file:
+        with open(model_save_path, "wb") as association_rules_file:
             pickle.dump(association_rules_df, file=association_rules_file)
 
         logger.info("Modèle sérialisé.")
-
-    logger.info("Entraînement terminé.")
 
 
 if __name__ == "__main__":
