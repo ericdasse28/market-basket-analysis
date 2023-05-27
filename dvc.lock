@@ -1,0 +1,28 @@
+schema: '2.0'
+stages:
+  process_data:
+    cmd: python src/process_data.py
+    deps:
+    - path: data/raw/groceries.csv
+      md5: 40921a38d0626b35cc4251fb3778dfbf
+      size: 1103280
+    - path: src/process_data.py
+      md5: 7159b2b437d257adf054849ddc92cc57
+      size: 1182
+    outs:
+    - path: data/prepared/prepared.csv
+      md5: e847c7d30017639b7b85448f86dbfd07
+      size: 444239
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/prepared/prepared.csv
+      md5: e847c7d30017639b7b85448f86dbfd07
+      size: 444239
+    - path: src/train.py
+      md5: 6534bb4754bbbf40d6045ec090b84b66
+      size: 2311
+    outs:
+    - path: model/association_rules.pkl
+      md5: 3eacd93a631de9e4c401488485467ecd
+      size: 5524
