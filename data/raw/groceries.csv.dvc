@@ -1,0 +1,4 @@
+outs:
+- md5: 40921a38d0626b35cc4251fb3778dfbf
+  size: 1103280
+  path: groceries.csv
