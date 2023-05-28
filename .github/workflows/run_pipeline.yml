@@ -1,11 +1,12 @@
 name: Run ML pipeline
+
 on:
     push:
-        branches:
-            - master
+        branches: [ "master" ]
         paths:
             - src/**
             - data/*
+            - .github/workflows/*
 
 jobs:
     run_code:
@@ -20,7 +21,7 @@ jobs:
               run: |
                 python -m pip install -U pip
                 python -m pip install -r requirements.txt
-                python -m pip install dagshub
+                python -m pip install dagshub dvc
 
             - name: Pull data from DVC
               run: |
