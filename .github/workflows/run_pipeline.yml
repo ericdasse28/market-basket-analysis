@@ -11,11 +11,16 @@ jobs:
     run_code:
         name: Run code
         runs-on: ubuntu-latest
-        container: ericdasse28/groceries_association_rules:dvc
         steps:
             - name: Check out the current repository
               id: checkout
               uses: actions/checkout@v2
+
+            - name: Install dependencies
+              run: |
+                python -m pip install -U pip
+                python -m pip install -r requirements.txt
+                python -m pip install dagshub
 
             - name: Pull data from DVC
               run: |
