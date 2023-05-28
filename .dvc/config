@@ -3,3 +3,5 @@
 ['remote "mygdriveremote"']
     url = gdrive://1x1Cik30-V-AjqUlLnq5FY5vSFG4iCWhr
     gdrive_acknowledge_abuse = true
+['remote "origin"']
+    url = https://dagshub.com/ericdasse28/market-basket-analysis.dvc
