@@ -28,10 +28,6 @@ def learn_association_rules():
     prepared_data_path = repo_path / "data/prepared/prepared.csv"
     transactions = read_transaction_csv(prepared_data_path)
 
-    # list_transactions = [
-    #     transaction[1]["itemDescription"].tolist() for transaction in list(transactions)
-    # ]
-
     association_rules = apriori(
         transactions,
         min_support=0.001,
