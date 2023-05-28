@@ -11,7 +11,7 @@ on:
 
 jobs:
     run_code:
-        name: Run code
+        name: ML pipeline
         runs-on: ubuntu-latest
         steps:
             - name: Check out the current repository
@@ -22,7 +22,6 @@ jobs:
               run: |
                 python -m pip install -U pip
                 python -m pip install -r requirements.txt
-                python -m pip install dagshub dvc dvc_gdrive
 
             - name: Pull data from DVC
               run: |
