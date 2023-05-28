@@ -8,7 +8,9 @@ from apyori import apriori
 def read_transaction_csv(csv_path):
     with open(csv_path, "r") as transaction_csv:
         list_transactions = transaction_csv.readlines()
-        list_transactions = map(lambda row: row.split(","), list_transactions)
+        list_transactions = map(
+            lambda row: row.replace("\n", "").split(","), list_transactions
+        )
 
         return list_transactions
 
