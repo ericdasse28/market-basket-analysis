@@ -1,6 +1,7 @@
 apyori==1.1.2
 dagshub>=0.2.15
-dvc>=2.58.1
 dvc-gdrive>=2.19.2
+dvc>=2.58.1
+Flask>=2.3.2
 loguru>=0.7.0
 pandas >= 1.5.2, <= 2.0.0
