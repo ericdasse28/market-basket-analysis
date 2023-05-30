@@ -20,9 +20,9 @@ stages:
       md5: e847c7d30017639b7b85448f86dbfd07
       size: 444239
     - path: src/train.py
-      md5: 76970c7f178436dd414c03d4ef3f1e4a
-      size: 2223
+      md5: 13e2789715387c55297d5d80aff0491c
+      size: 2162
     outs:
     - path: model/association_rules.pkl
-      md5: dfd3ac76636fcf714983cb74b3e2dc18
-      size: 2747
+      md5: 188e3e95e0f5999d2ad2ee3e7f5b1c34
+      size: 3735
