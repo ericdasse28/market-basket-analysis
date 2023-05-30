@@ -3,5 +3,6 @@ dagshub>=0.2.15
 dvc-gdrive>=2.19.2
 dvc>=2.58.1
 Flask>=2.3.2
+joblib>=1.2.0
 loguru>=0.7.0
 pandas >= 1.5.2, <= 2.0.0
