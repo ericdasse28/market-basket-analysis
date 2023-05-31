@@ -1,5 +1,6 @@
 """Article recommendation API"""
 
+import os
 from pathlib import Path
 import pickle
 from flask import Flask, jsonify, request
@@ -16,7 +17,8 @@ def recommend():
 
     # Loading saved model
     repo_path = Path(__file__).parent.parent
-    model_df = joblib.load(repo_path / "model/association_rules.pkl")
+    model_path = os.environ.get("MODEL_PATH", repo_path / "model/association_rules.pkl")
+    model_df = joblib.load(model_path)
     # Perform next product prediction here
     prediction_info = model_df[model_df["Product1"] == product]
     predicted_product = prediction_info["Product2"][0]
