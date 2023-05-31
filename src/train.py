@@ -1,5 +1,6 @@
 from pathlib import Path
 import pickle
+import joblib
 from loguru import logger
 import pandas as pd
 from apyori import apriori
@@ -63,8 +64,7 @@ def train(serialize=True):
         repo_path = Path(__file__).parent.parent
         model_save_path = repo_path / "model/association_rules.pkl"
 
-        with open(model_save_path, "wb") as association_rules_file:
-            pickle.dump(association_rules_df, file=association_rules_file)
+        joblib.dump(association_rules_df, filename=model_save_path)
 
         logger.info("Modèle sérialisé.")
 
