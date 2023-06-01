@@ -3,6 +3,12 @@ name: Build recommendation app
 on:
     push:
         branches: ["master"]
+        paths:
+          - src/**
+          - data/*
+          - .github/workflows/*
+          - .dvc/*
+          - Dockerfile
 
 jobs:
     docker:
