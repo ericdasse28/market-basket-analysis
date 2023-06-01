@@ -21,11 +21,11 @@ jobs:
               run: |
                 docker login -u $DOCKERHUB_USER -p $DOCKERHUB_ACCESS_TOKEN
 
-            - name: docker build
+            - name: docker app build
               run: | # Tag the image with the commit hash
                 docker build -t $DOCKERHUB_REPOSITORY .
                 docker tag $DOCKERHUB_REPOSITORY:latest $DOCKERHUB_REPOSITORY:$(git log -1 --pretty=%h)
 
-            - name: docker push
+            - name: docker app deploy
               run: |
                 docker push $DOCKERHUB_REPOSITORY
