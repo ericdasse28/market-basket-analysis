@@ -12,6 +12,7 @@ on:
 
 jobs:
     docker:
+        name: App build & deploy pipeline
         runs-on: ubuntu-latest
 
         steps:
