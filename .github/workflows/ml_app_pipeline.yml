@@ -10,6 +10,10 @@ on:
           - .dvc/*
           - Dockerfile
 
+env:
+    DOCKERHUB_REPOSITORY: ${{ secrets.DOCKERHUB_REPOSITORY }}
+    GIT_HASH: $(git log -1 --pretty=%h)
+
 jobs:
     docker:
         name: App build & deploy pipeline
@@ -27,13 +31,10 @@ jobs:
                 docker login -u $DOCKERHUB_USER -p $DOCKERHUB_ACCESS_TOKEN
 
             - name: docker app build
-              env:
-                DOCKERHUB_REPOSITORY: ${{ secrets.DOCKERHUB_REPOSITORY }}
-
               run: | # Tag the image with the commit hash
-                docker build -t $DOCKERHUB_REPOSITORY .
-                docker tag $DOCKERHUB_REPOSITORY:latest $DOCKERHUB_REPOSITORY:$(git log -1 --pretty=%h)
+                docker build -t $DOCKERHUB_REPOSITORY:$GIT_HASH .
 
             - name: docker app deploy
               run: |
-                docker push ${{ secrets.DOCKERHUB_REPOSITORY }}
+                docker push $DOCKERHUB_REPOSITORY:$GIT_HASH
+
