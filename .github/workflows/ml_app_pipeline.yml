@@ -21,6 +21,12 @@ jobs:
         steps:
           - uses: actions/checkout@v2
 
+          - name: Pull model from DVC
+            run: |
+              pip install dvc dvc-gdrive
+              dvc get https://dagshub.com/ericdasse28/market-basket-analysis model/association_rules.pkl
+              mv association_rules.pkl model/
+
           - name: docker login
             env:
               DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
