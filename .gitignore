@@ -8,3 +8,6 @@ __pycache__/
 
 # Unit tests
 .pytest_cache/
+
+# VS Code
+.vscode/

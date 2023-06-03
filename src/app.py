@@ -2,7 +2,6 @@
 
 import os
 from pathlib import Path
-import pickle
 from flask import Flask, jsonify, request
 import joblib
 

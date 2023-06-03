@@ -1,0 +1,45 @@
+name: Build recommendation app
+
+on:
+    push:
+        branches: ["master"]
+        paths:
+          - src/**
+          - data/*
+          - .github/workflows/*
+          - .dvc/*
+          - Dockerfile
+
+env:
+    DOCKERHUB_REPOSITORY: ${{ secrets.DOCKERHUB_REPOSITORY }}
+    GIT_HASH: $(git log -1 --pretty=%h)
+
+jobs:
+    docker:
+        name: App build & deploy pipeline
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: docker login
+              env:
+                DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+                DOCKERHUB_ACCESS_TOKEN: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+
+              run: |
+                docker login -u $DOCKERHUB_USER -p $DOCKERHUB_ACCESS_TOKEN
+
+            - name: docker app build
+              run: | # Tag the image with the commit hash
+                docker build -t $DOCKERHUB_REPOSITORY:$GIT_HASH .
+
+            - name: docker app deploy
+              run: |
+                docker push $DOCKERHUB_REPOSITORY:$GIT_HASH
+
+            - name: docker app release
+              run: |
+                docker pull $DOCKERHUB_REPOSITORY:$GIT_HASH
+                docker tag $DOCKERHUB_REPOSITORY:$GIT_HASH $DOCKERHUB_REPOSITORY:latest
+                docker push $DOCKERHUB_REPOSITORY:latest
