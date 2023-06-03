@@ -12,16 +12,16 @@ on:
 
 env:
     DOCKERHUB_REPOSITORY: ${{ secrets.DOCKERHUB_REPOSITORY }}
-    GIT_HASH: $(git log -1 --pretty=%h)
 
 jobs:
     docker:
         name: App build & deploy pipeline
         runs-on: ubuntu-latest
+        uses: actions/checkout@v2
+        env:
+          GIT_HASH: $(git log -1 pretty=%h)
 
         steps:
-            - uses: actions/checkout@v2
-
             - name: docker login
               env:
                 DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
@@ -32,14 +32,15 @@ jobs:
 
             - name: docker app build
               run: | # Tag the image with the commit hash
-                docker build -t $DOCKERHUB_REPOSITORY:$GIT_HASH .
+                
+                docker build -t $DOCKERHUB_REPOSITORY:"$GIT_HASH" .
 
             - name: docker app deploy
               run: |
-                docker push $DOCKERHUB_REPOSITORY:$GIT_HASH
+                docker push $DOCKERHUB_REPOSITORY:"$GIT_HASH"
 
             - name: docker app release
               run: |
-                docker pull $DOCKERHUB_REPOSITORY:$GIT_HASH
-                docker tag $DOCKERHUB_REPOSITORY:$GIT_HASH $DOCKERHUB_REPOSITORY:latest
+                docker pull $DOCKERHUB_REPOSITORY:"$GIT_HASH"
+                docker tag $DOCKERHUB_REPOSITORY:"$GIT_HASH" $DOCKERHUB_REPOSITORY:latest
                 docker push $DOCKERHUB_REPOSITORY:latest
