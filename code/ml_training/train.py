@@ -27,7 +27,7 @@ def inspect(results):
 
 
 def learn_association_rules():
-    repo_path = Path(__file__).parent.parent
+    repo_path = Path(__file__).parent.parent.parent
     prepared_data_path = repo_path / "data/prepared/prepared.csv"
     transactions = read_transaction_csv(prepared_data_path)
 

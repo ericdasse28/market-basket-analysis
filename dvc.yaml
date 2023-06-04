@@ -3,7 +3,7 @@ stages:
     cmd: python code/ml_training/process_data.py
     deps:
     - data/raw/groceries.csv
-    - src/process_data.py
+    - code/ml_training/process_data.py
     outs:
     - data/prepared/prepared.csv
   
