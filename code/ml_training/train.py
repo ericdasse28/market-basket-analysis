@@ -61,7 +61,7 @@ def train(serialize=True):
 
     if serialize:
         logger.info("Sérialisation du modèle...")
-        repo_path = Path(__file__).parent.parent
+        repo_path = Path(__file__).parent.parent.parent
         model_save_path = repo_path / "model/association_rules.pkl"
 
         joblib.dump(association_rules_df, filename=model_save_path)

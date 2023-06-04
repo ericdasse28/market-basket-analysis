@@ -7,7 +7,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY src/app.py /app/
+COPY code/ml_app/app.py /app/
 COPY model/ model/
 ENV MODEL_PATH=model/
 

@@ -15,7 +15,7 @@ def recommend():
     product = json["product"]
 
     # Loading saved model
-    repo_path = Path(__file__).parent.parent
+    repo_path = Path(__file__).parent.parent.parent
     model_path = os.environ.get("MODEL_PATH", repo_path / "model/association_rules.pkl")
     model_df = joblib.load(model_path)
     # Perform next product prediction here

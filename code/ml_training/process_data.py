@@ -17,7 +17,7 @@ def process_data():
     logger.info("Préparation de données en cours...")
 
     logger.info("Récupération des données brutes")
-    repo_path = Path(__file__).parent.parent
+    repo_path = Path(__file__).parent.parent.parent
     data_path = repo_path / "data/raw/groceries.csv"
     sales_df = pd.read_csv(data_path)
 
