@@ -26,6 +26,9 @@ jobs:
               pip install dvc
               dvc get https://github.com/ericdasse28/market-basket-analysis model/association_rules.pkl
               mv association_rules.pkl model/
+
+          - name: List model directory
+            run: |
               ls model/
 
           - name: docker login
