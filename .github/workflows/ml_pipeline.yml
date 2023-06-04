@@ -28,13 +28,13 @@ jobs:
                 dvc remote modify origin --local auth basic
                 dvc remote modify origin --local user ${{ secrets.DAGSHUB_USERNAME }}
                 dvc remote modify origin --local password ${{ secrets.DAGSHUB_TOKEN }}
-                dvc pull -r origin
+                dvc pull
 
             - name: Run the pipeline with DVC
               run: dvc repro
 
             - name: Push the outcomes to DVC remote storage
-              run: dvc push -r origin
+              run: dvc push
 
             - name: Commit changes in dvc.lock
               uses: stefanzweifel/git-auto-commit-action@v4
