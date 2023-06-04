@@ -4,7 +4,7 @@ on:
     push:
         branches: [ "master" ]
         paths:
-            - market_basket_analysis/ml_training/**
+            - code/ml_training/**
             - data/*
             - .github/workflows/*
             - .dvc/*
