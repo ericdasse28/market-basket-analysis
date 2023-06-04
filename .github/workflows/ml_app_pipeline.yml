@@ -23,9 +23,10 @@ jobs:
 
           - name: Pull model from DVC
             run: |
-              pip install dvc dvc-gdrive
-              dvc get https://dagshub.com/ericdasse28/market-basket-analysis model/association_rules.pkl
+              pip install dvc
+              dvc get https://github.com/ericdasse28/market-basket-analysis model/association_rules.pkl
               mv association_rules.pkl model/
+              ls model/
 
           - name: docker login
             env:
